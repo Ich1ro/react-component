@@ -26,6 +26,7 @@
 }
 
 .main_left_title {
+	color: #a296bd;
 	width: 100%;
 	margin: 20px;
 	margin-bottom: 0;
@@ -76,6 +77,7 @@
 .main_right_header_info_earned_number, .main_right_header_info_balance_number {
 	font-weight: bold;
 	font-size: 26px;
+	color: white;
 }
 
 .main_right_header_info_balance_text, .main_right_header_info_earned_text {
@@ -157,7 +159,7 @@ background-color: #0a0019 !important;
 }
 
 .rs-picker-select-menu-item.rs-picker-select-menu-item-active {
-	color: #000;
+	color: white;
 	background-color: #47376c;
 }
 
@@ -166,7 +168,7 @@ background-color: #0a0019 !important;
 }
 
 .rs-picker-select-menu-item:hover {
-	color: #000;
+	color: white;
 }
 
 iframe#webpack-dev-server-client-overlay{display:none!important}
