@@ -1,38 +1,172 @@
-.App {
-  text-align: center;
+@import url('rsuite/SelectPicker/styles/index.css');
+@import url('rsuite/InputNumber/styles/index.css');
+@import url('rsuite/Slider/styles/index.css');
+
+.app {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main {
+	width: 1074px;
+	height: 500px;
+	max-width: none;
+	background-image: radial-gradient(circle, #000 20%, rgba(127, 86, 217, 0.22));
+	border: 2px solid #47376c;
+	border-radius: 18px;
+	margin-top: 75px;
+	display: flex;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main_left {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.main_left_title {
+	width: 100%;
+	margin: 20px;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	font-size: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+.main_left_form {
+	flex-direction: column;
+	display: flex;
+	margin: 20px;
+	margin-top: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main_left_form > div {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
+
+.main_left_form > div > label {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.main_right {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+}
+
+.main_right_header_info {
+	display: flex;
+	margin: 20px;
+}
+
+.main_right_header_info_earned_number, .main_right_header_info_balance {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+}
+
+.main_right_header_info_earned {
+	margin-right: 45px;
+	margin-left: 45px;
+}
+
+.main_right_header_info_earned_number, .main_right_header_info_balance_number {
+	font-weight: bold;
+	font-size: 26px;
+}
+
+.main_right_header_info_balance_text, .main_right_header_info_earned_text {
+	font-size: 13px;
+}
+
+.main_right_stats {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	width: 100%;
+}
+
+.input-group {
+	width: 100%;
+	background: none !important;
+	background-color: transparent !important;
+}
+
+.center {
+	width: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.center_line {
+	width: 2px;
+	
+	background: linear-gradient(to bottom, transparent 10%, lightGray, lightGray 90%, transparent 100%),
+              linear-gradient(to top, transparent 10%, lightGray, lightGray 90%, transparent 100%);
+	height: 100%;
+}
+
+.middle {
+	margin-top: 25px;
+	width: 100%;
+	height: 2px;
+}
+
+.middle_line {
+	width: 100%;
+	height: 2px;
+	/* background-color: lightgray; */
+	background: linear-gradient(to right, transparent 10%, lightGray, lightGray 100%, transparent 100%);
+}
+
+.custom-tooltip {
+	padding: 5px 10px;
+	border-radius: 16px;
+	background-color: #03feeb;
+}
+
+.label, .intro, .desc {
+	font-size: 12px;
+	color: black;
+}
+
+.recharts-wrapper {
+	width: 405px !important;
+}
+
+.main_left_form_apy > p {
+	font-weight: bold;
+}
+
+.rs-picker-toggle.rs-btn.rs-btn-default, .rs-input-group-addon, .rs-input {
+	background: none !important;
+	background-color: transparent !important;
+}
+
+.rs-picker-has-value .rs-btn .rs-picker-toggle-value, .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
+	color: white !important;
+}
+
+.rs-picker-popup {
+background-color: #0a0019 !important;
+}
+
+.rs-picker-select-menu-item.rs-picker-select-menu-item-active {
+	color: #000;
+	background-color: #47376c;
+}
+
+.rs-picker-select-menu-item, .rs-input-group-addon, .rs-input {
+	color: white;
+}
+
+.rs-picker-select-menu-item:hover {
+	color: #000;
+}
+
+iframe#webpack-dev-server-client-overlay{display:none!important}
