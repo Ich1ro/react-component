@@ -239,17 +239,17 @@ function App() {
 				<div className='main_right'>
 					<div className='main_right_header_info'>
 						<div className='main_right_header_info_earned'>
-							<div className='main_right_header_info_earned_number'>{`$ ${
-								calcEarned().interest
-							}`}</div>
+							<div className='main_right_header_info_earned_number'>{`$ ${new Intl.NumberFormat(
+								'en-US'
+							).format(calcEarned().interest)}`}</div>
 							<div className='main_right_header_info_earned_text'>
 								Total Interest Earned
 							</div>
 						</div>
 						<div className='main_right_header_info_balance'>
-							<div className='main_right_header_info_balance_number'>{`$ ${
-								calcEarned().totalAmount
-							}`}</div>
+							<div className='main_right_header_info_balance_number'>{`$ ${new Intl.NumberFormat(
+								'en-US'
+							).format(calcEarned().totalAmount)}`}</div>
 							<div className='main_right_header_info_balance_text'>
 								Total Balance
 							</div>
