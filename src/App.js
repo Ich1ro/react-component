@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import './App.css';
 
-import { SelectPicker, Input, InputGroup, InputNumber, Slider } from 'rsuite';
-import { LineChart, Line, Tooltip, Legend } from 'recharts';
+import { SelectPicker, Input, InputGroup } from 'rsuite';
+import { LineChart, Line, Tooltip } from 'recharts';
 
 function App() {
 	const [accTypes, setAccTypes] = useState('Orbit');
 	const [interestState, setInterestState] = useState('Monthly');
-	const [deposit, setDeposit] = useState(50000);
+	const [deposit, setDeposit] = useState('50,000');
 	const [termState, setTermState] = useState('5');
 
 	const accountTypes = useMemo(
@@ -66,10 +66,11 @@ function App() {
 
 	const calcEarned = () => {
 		const apy = calcApy();
+		const numericValue = parseFloat(deposit.replace(/,/g, ''))
 
-		const interest = +deposit * (apy / 100) * +termState;
+		const interest = +numericValue * (apy / 100) * +termState;
 
-		const totalAmount = +deposit + +interest;
+		const totalAmount = +numericValue + +interest;
 
 		return {
 			interest: Number(interest.toFixed(2)),
@@ -79,13 +80,14 @@ function App() {
 
 	const generateDataPoints = () => {
 		const sortedDataPoints = [];
+		const numericValue = parseFloat(deposit.replace(/,/g, ''));
 		switch (interestState) {
 			case 'Monthly':
 				for (let i = 1; i <= 12; i++) {
 					const interest = calcEarned().interest;
-					const totalAmount = +deposit + +interest;
+					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(+deposit + (totalAmount - deposit) * (i / 12)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / 12)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Month`, value });
 				}
@@ -93,9 +95,9 @@ function App() {
 			case 'Quarterly':
 				for (let i = 1; i <= 4; i++) {
 					const interest = calcEarned().interest;
-					const totalAmount = +deposit + +interest;
+					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(+deposit + (totalAmount - deposit) * (i / 4)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / 4)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Quarter`, value });
 				}
@@ -103,16 +105,16 @@ function App() {
 			case 'Annually':
 				for (let i = 1; i <= +termState; i++) {
 					const interest = calcEarned().interest;
-					const totalAmount = +deposit + +interest;
+					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(+deposit + (totalAmount - deposit) * (i / 3)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / 3)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Year`, value });
 				}
 				break;
 			case 'Term':
-				const interest = deposit * (calcApy() / 100) * termState;
-				const totalAmount = deposit + interest;
+				const interest = numericValue * (calcApy() / 100) * termState;
+				const totalAmount = numericValue + interest;
 				sortedDataPoints.push({ title: `Term`, value: totalAmount });
 				break;
 			default:
@@ -126,22 +128,9 @@ function App() {
 		[interestState, accTypes, interestState, deposit, termState]
 	);
 
-	const getXAxisDataKey = () => {
-		switch (interestState) {
-			case 'Monthly':
-				return 'month';
-			case 'Quarterly':
-				return 'quarter';
-			case 'Annually':
-				return 'year';
-			case 'Term':
-				return 'year';
-			default:
-				return '';
-		}
-	};
-
 	function CustomTooltip({ payload, label, active }) {
+		const numericValue = parseFloat(deposit.replace(/,/g, ''));
+
 		if (active) {
 			return (
 				<div className='custom-tooltip'>
@@ -149,7 +138,7 @@ function App() {
 						label + 1
 					}`}</p>
 					<p className='intro'>{`Interest - $${Number(
-						payload[0].payload.value - +deposit
+						payload[0].payload.value - numericValue
 					).toFixed(0)}`}</p>
 					<p className='desc'>{`Total - $${Number(
 						payload[0].payload.value
@@ -180,10 +169,10 @@ function App() {
 								onChange={e => {
 									if (e === 'Orbit') {
 										setAccTypes(e);
-										setDeposit(50000);
+										setDeposit('50,000');
 									} else {
 										setAccTypes(e);
-										setDeposit(100000);
+										setDeposit('100,000');
 									}
 								}}
 							/>
@@ -203,16 +192,30 @@ function App() {
 						</div>
 						<div>
 							<label>Deposit Amount</label>
-							<InputNumber
+							<InputGroup>
+								<InputGroup.Addon>$</InputGroup.Addon>
+								<Input
+									className='input-group'
+									defaultValue={typeof(deposit) === 'string' ? deposit :  new Intl.NumberFormat('en-US').format(deposit)}
+									min={accTypes === 'Orbit' ? '50,000' : '100,000'}
+									value={typeof(deposit) === 'string' ? deposit :  new Intl.NumberFormat('en-US').format(deposit)}
+									onChange={e => {
+										const numericValue = parseFloat(e.replace(/,/g, ''));
+
+										setDeposit(new Intl.NumberFormat('en-US').format(numericValue));
+									}}
+								/>
+							</InputGroup>
+							{/* <InputNumber
 								prefix='$'
 								className='input-group'
-								defaultValue={deposit}
+								defaultValue={parseInt(deposit)}
 								min={accTypes === 'Orbit' ? 50000 : 100000}
-								value={deposit}
+								value={+deposit}
 								onChange={e => {
 									setDeposit(e);
 								}}
-							/>
+							/> */}
 						</div>
 						<div>
 							<label>Term</label>

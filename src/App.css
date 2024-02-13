@@ -261,3 +261,18 @@ iframe#webpack-dev-server-client-overlay {
 		width: 100% !important;
 	}
 }
+
+@media screen and (max-width: 350px) {
+	.main_right_header_info {
+		width: auto;
+		margin: 10px;
+	}
+
+	.main_right_header_info_earned {
+		margin-right: 20px;
+		margin-left: 10px;
+	}
+	.main_right_header_info_balance_number, .main_right_header_info_earned_number {
+		font-size: 20px;
+	}
+}
