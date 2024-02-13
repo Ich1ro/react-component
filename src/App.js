@@ -107,7 +107,7 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / 3)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / +termState)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Year`, value });
 				}
