@@ -87,7 +87,7 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / 12)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / +termState / 12)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Month`, value });
 				}
@@ -97,7 +97,7 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / 4)).toFixed(2)
+						(numericValue + (totalAmount - numericValue) * (i / +termState / 4)).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Quarter`, value });
 				}
