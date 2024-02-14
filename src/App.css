@@ -16,10 +16,11 @@
 	border: 2px solid #47376c;
 	border-radius: 18px;
 	display: flex;
+	justify-content: space-between;
 }
 
 .main_left {
-	width: 35%;
+	width: 30%;
 	display: flex;
 	flex-direction: column;
 }
@@ -52,7 +53,7 @@
 }
 
 .main_right {
-	width: 60%;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
 }
@@ -101,10 +102,25 @@
 }
 
 .center {
-	width: 5%;
+	width: 1%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.center-info {
+	width: 15%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 40px 0;
+}
+
+.center-line {
+	width: 100%;
+	height: 2px;
+	background: linear-gradient( to left, transparent 20%, lightGray, lightGray 80%, transparent 100% ), linear-gradient( to right, transparent 20%, lightGray, lightGray 80%, transparent 100% );
 }
 
 .center_line {
@@ -125,6 +141,12 @@
 			transparent 100%
 		);
 	height: 100%;
+}
+
+.center-info-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .middle {
@@ -272,7 +294,8 @@ iframe#webpack-dev-server-client-overlay {
 		margin-right: 20px;
 		margin-left: 10px;
 	}
-	.main_right_header_info_balance_number, .main_right_header_info_earned_number {
+	.main_right_header_info_balance_number,
+	.main_right_header_info_earned_number {
 		font-size: 20px;
 	}
 }

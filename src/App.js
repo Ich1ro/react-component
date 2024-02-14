@@ -66,7 +66,7 @@ function App() {
 
 	const calcEarned = () => {
 		const apy = calcApy();
-		const numericValue = parseFloat(deposit.replace(/,/g, ''))
+		const numericValue = parseFloat(deposit.replace(/,/g, ''));
 
 		const interest = +numericValue * (apy / 100) * +termState;
 
@@ -107,7 +107,10 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / +termState)).toFixed(2)
+						(
+							numericValue +
+							(totalAmount - numericValue) * (i / +termState)
+						).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Year`, value });
 				}
@@ -128,6 +131,60 @@ function App() {
 		[interestState, accTypes, interestState, deposit, termState]
 	);
 
+	function GenerateCenterInfo() {
+		return (
+			<>
+				<div className='center-info-details'>
+					<div className='main_right_header_info_earned_number'>
+						${' '}
+						{interestState === 'Monthly'
+							? new Intl.NumberFormat('en-US').format(
+									parseInt(calcEarned().interest / +termState / 12)
+							  )
+							: 0}
+					</div>
+					<div className='main_right_header_info_earned_text'>Monthly</div>
+				</div>
+				<div className='center-line'></div>
+				<div className='center-info-details'>
+					<div className='main_right_header_info_earned_number'>
+						${' '}
+						{interestState === 'Quarterly' || interestState === 'Monthly'
+							? new Intl.NumberFormat('en-US').format(
+									parseInt(calcEarned().interest / +termState / 4)
+							  )
+							: 0}
+					</div>
+					<div className='main_right_header_info_earned_text'>Quarterly</div>
+				</div>
+				<div className='center-line'></div>
+				<div className='center-info-details'>
+					<div className='main_right_header_info_earned_number'>
+						${' '}
+						{interestState === 'Annually' ||
+						interestState === 'Quarterly' ||
+						interestState === 'Monthly'
+							? new Intl.NumberFormat('en-US').format(
+									parseInt(calcEarned().interest / 5)
+							  )
+							: 0}
+					</div>
+					<div className='main_right_header_info_earned_text'>Yearly</div>
+				</div>
+				<div className='center-line'></div>
+				<div className='center-info-details'>
+					<div className='main_right_header_info_earned_number'>
+						${' '}
+						{new Intl.NumberFormat('en-US').format(
+							parseInt(calcEarned().interest)
+						)}
+					</div>
+					<div className='main_right_header_info_earned_text'>Term</div>
+				</div>
+			</>
+		);
+	}
+
 	function CustomTooltip({ payload, label, active }) {
 		const numericValue = parseFloat(deposit.replace(/,/g, ''));
 
@@ -137,12 +194,14 @@ function App() {
 					<p className='label'>{`${payload[0].payload.title} - ${
 						label + 1
 					}`}</p>
-					<p className='intro'>{`Interest - $${Number(
-						payload[0].payload.value - numericValue
-					).toFixed(0)}`}</p>
-					<p className='desc'>{`Total - $${Number(
-						payload[0].payload.value
-					).toFixed(0)}`}</p>
+					<p className='intro'>{`Interest - $${new Intl.NumberFormat(
+						'en-US'
+					).format(
+						Number(payload[0].payload.value - numericValue).toFixed(0)
+					)}`}</p>
+					<p className='desc'>{`Total - $${new Intl.NumberFormat(
+						'en-US'
+					).format(Number(payload[0].payload.value).toFixed(0))}`}</p>
 				</div>
 			);
 		}
@@ -178,31 +237,28 @@ function App() {
 							/>
 						</div>
 						<div>
-							<label>Interest</label>
-							<SelectPicker
-								data={interests}
-								searchable={false}
-								defaultValue={interestState}
-								style={{ width: '100%', opacity: 0.9 }}
-								className='input-group'
-								onChange={e => {
-									setInterestState(e);
-								}}
-							/>
-						</div>
-						<div>
 							<label>Deposit Amount</label>
 							<InputGroup>
 								<InputGroup.Addon>$</InputGroup.Addon>
 								<Input
 									className='input-group'
-									defaultValue={typeof(deposit) === 'string' ? deposit :  new Intl.NumberFormat('en-US').format(deposit)}
+									defaultValue={
+										typeof deposit === 'string'
+											? deposit
+											: new Intl.NumberFormat('en-US').format(deposit)
+									}
 									min={accTypes === 'Orbit' ? '50,000' : '100,000'}
-									value={typeof(deposit) === 'string' ? deposit :  new Intl.NumberFormat('en-US').format(deposit)}
+									value={
+										typeof deposit === 'string'
+											? deposit
+											: new Intl.NumberFormat('en-US').format(deposit)
+									}
 									onChange={e => {
 										const numericValue = parseFloat(e.replace(/,/g, ''));
 
-										setDeposit(new Intl.NumberFormat('en-US').format(numericValue));
+										setDeposit(
+											new Intl.NumberFormat('en-US').format(numericValue)
+										);
 									}}
 								/>
 							</InputGroup>
@@ -218,7 +274,7 @@ function App() {
 							/> */}
 						</div>
 						<div>
-							<label>Term</label>
+							<label>Term Length</label>
 							<SelectPicker
 								data={terms}
 								searchable={false}
@@ -234,7 +290,26 @@ function App() {
 							<label>APY</label>
 							<p>{calcApy()}%</p>
 						</div>
+						<div>
+							<label>Interest Distribution Schedule</label>
+							<SelectPicker
+								data={interests}
+								searchable={false}
+								defaultValue={interestState}
+								style={{ width: '100%', opacity: 0.9 }}
+								className='input-group'
+								onChange={e => {
+									setInterestState(e);
+								}}
+							/>
+						</div>
 					</form>
+				</div>
+				<div className='center'>
+					<div className='center_line'></div>
+				</div>
+				<div className='center-info'>
+					<GenerateCenterInfo />
 				</div>
 				<div className='center'>
 					<div className='center_line'></div>
