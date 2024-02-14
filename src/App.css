@@ -263,6 +263,15 @@ iframe#webpack-dev-server-client-overlay {
 			);
 	}
 
+	.center-info {
+		width: 100%;
+		padding: 20px 0;
+	}
+
+	.center-info-details {
+		padding: 10px;
+	}
+
 	.middle:last-child {
 		display: none;
 	}
