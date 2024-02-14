@@ -92,7 +92,19 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 50px;
+	width: 405px;
+	height: 225px;
+}
+
+.main_right_stats-wrapper {
 	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.main_right_stats > div {
+	display: flex;
+	justify-content: center;
 }
 
 .input-group {
@@ -180,10 +192,10 @@
 	font-size: 12px;
 	color: black;
 }
-
+/* 
 .recharts-wrapper {
 	width: 405px !important;
-}
+} */
 
 .main_left_form_apy > p {
 	font-weight: bold;

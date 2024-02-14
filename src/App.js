@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import './App.css';
 
 import { SelectPicker, Input, InputGroup } from 'rsuite';
-import { LineChart, Line, Tooltip } from 'recharts';
+import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
 function App() {
 	const [accTypes, setAccTypes] = useState('Orbit');
@@ -87,7 +87,10 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / +termState / 12)).toFixed(2)
+						(
+							numericValue +
+							(totalAmount - numericValue) * (i / +termState / 12)
+						).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Month`, value });
 				}
@@ -97,7 +100,10 @@ function App() {
 					const interest = calcEarned().interest;
 					const totalAmount = numericValue + +interest;
 					const value = Number(
-						(numericValue + (totalAmount - numericValue) * (i / +termState / 4)).toFixed(2)
+						(
+							numericValue +
+							(totalAmount - numericValue) * (i / +termState / 4)
+						).toFixed(2)
 					);
 					sortedDataPoints.push({ title: `Quarter`, value });
 				}
@@ -336,29 +342,39 @@ function App() {
 					<div className='middle'>
 						<div className='middle_line'></div>
 					</div>
-					<div className='main_right_stats'>
-						<LineChart width={400} height={225} data={dataPoints}>
-							{/* <XAxis dataKey={getXAxisDataKey()} />
+					<div className='main_right_stats-wrapper'>
+						<div className='main_right_stats'>
+							<ResponsiveContainer>
+								<LineChart width={500} height={225} data={dataPoints}>
+									{/* <XAxis dataKey={getXAxisDataKey()} />
 							<YAxis /> */}
-							<Tooltip content={<CustomTooltip />} />
-							{/* <Legend /> */}
-							<Line
-								type='monotone'
-								dataKey='value'
-								stroke='#03feeb'
-								fill='#03feeb'
-								dot={{ r: 4, filter: 'url(#glow)' }}
-							/>
-							<defs>
-								<filter id='glow' x='-50%' y='-80%' width='300%' height='300%'>
-									<feGaussianBlur result='blur' stdDeviation='4' />
-									<feMerge>
-										<feMergeNode in='blur' />
-										<feMergeNode in='SourceGraphic' />
-									</feMerge>
-								</filter>
-							</defs>
-						</LineChart>
+									<Tooltip content={<CustomTooltip />} />
+									{/* <Legend /> */}
+									<Line
+										type='monotone'
+										dataKey='value'
+										stroke='#03feeb'
+										fill='#03feeb'
+										dot={{ r: 4, filter: 'url(#glow)' }}
+									/>
+									<defs>
+										<filter
+											id='glow'
+											x='-50%'
+											y='-80%'
+											width='300%'
+											height='300%'
+										>
+											<feGaussianBlur result='blur' stdDeviation='4' />
+											<feMerge>
+												<feMergeNode in='blur' />
+												<feMergeNode in='SourceGraphic' />
+											</feMerge>
+										</filter>
+									</defs>
+								</LineChart>
+							</ResponsiveContainer>
+						</div>
 					</div>
 					<div className='middle'>
 						<div className='middle_line'></div>
