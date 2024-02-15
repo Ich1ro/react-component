@@ -171,7 +171,7 @@ function App() {
 						interestState === 'Quarterly' ||
 						interestState === 'Monthly'
 							? new Intl.NumberFormat('en-US').format(
-									parseInt(calcEarned().interest / 5)
+									parseInt(calcEarned().interest / +termState)
 							  )
 							: 0}
 					</div>
