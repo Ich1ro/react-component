@@ -240,6 +240,9 @@ function App() {
 										setDeposit('100,000');
 									}
 								}}
+								onClean={() => {
+									setAccTypes('Orbit')
+								}}
 							/>
 						</div>
 						<div>
@@ -290,6 +293,9 @@ function App() {
 								onChange={e => {
 									setTermState(e);
 								}}
+								onClean={(e) => {
+									setTermState('5')
+								}}
 							/>
 						</div>
 						<div className='main_left_form_apy'>
@@ -306,6 +312,9 @@ function App() {
 								className='input-group'
 								onChange={e => {
 									setInterestState(e);
+								}}
+								onClean={() => {
+									setInterestState('Monthly')
 								}}
 							/>
 						</div>
