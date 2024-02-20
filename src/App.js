@@ -241,7 +241,7 @@ function App() {
 									}
 								}}
 								onClean={() => {
-									setAccTypes('Orbit')
+									setAccTypes('Orbit');
 								}}
 							/>
 						</div>
@@ -263,11 +263,15 @@ function App() {
 											: new Intl.NumberFormat('en-US').format(deposit)
 									}
 									onChange={e => {
-										const numericValue = parseFloat(e.replace(/,/g, ''));
+										if (e === '') {
+											setDeposit(new Intl.NumberFormat('en-US').format(0));
+										} else {
+											const numericValue = parseFloat(e.replace(/,/g, ''));
 
-										setDeposit(
-											new Intl.NumberFormat('en-US').format(numericValue)
-										);
+											setDeposit(
+												new Intl.NumberFormat('en-US').format(numericValue)
+											);
+										}
 									}}
 								/>
 							</InputGroup>
@@ -293,8 +297,8 @@ function App() {
 								onChange={e => {
 									setTermState(e);
 								}}
-								onClean={(e) => {
-									setTermState('5')
+								onClean={e => {
+									setTermState('5');
 								}}
 							/>
 						</div>
@@ -314,7 +318,7 @@ function App() {
 									setInterestState(e);
 								}}
 								onClean={() => {
-									setInterestState('Monthly')
+									setInterestState('Monthly');
 								}}
 							/>
 						</div>
