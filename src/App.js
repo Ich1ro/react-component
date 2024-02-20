@@ -251,11 +251,11 @@ function App() {
 								<InputGroup.Addon>$</InputGroup.Addon>
 								<Input
 									className='input-group'
-									defaultValue={
-										typeof deposit === 'string'
-											? deposit
-											: new Intl.NumberFormat('en-US').format(deposit)
-									}
+									// defaultValue={
+									// 	typeof deposit === 'string'
+									// 		? deposit
+									// 		: new Intl.NumberFormat('en-US').format(deposit)
+									// }
 									min={accTypes === 'Orbit' ? '50,000' : '100,000'}
 									value={
 										typeof deposit === 'string'
@@ -266,15 +266,27 @@ function App() {
 										if (e === '') {
 											setDeposit(new Intl.NumberFormat('en-US').format(0));
 										} else {
-											const numericValue = parseFloat(e.replace(/,/g, ''));
-
 											setDeposit(
-												new Intl.NumberFormat('en-US').format(numericValue)
+												new Intl.NumberFormat('en-US').format(
+													parseFloat(e.replace(/,/g, ''))
+												)
 											);
 										}
 									}}
 								/>
 							</InputGroup>
+								{(() => {
+									if (typeof deposit === 'string') {
+										const numericValue = parseFloat(deposit.replace(/,/g, ''));
+										if (accTypes === 'Orbit' && numericValue < 50000) {
+											return <p className='error'>Min deposit $50,000</p>;
+										}
+										if (accTypes === 'Odysey' && numericValue < 100000) {
+											return <p className='error'>Min deposit $100,000</p>;
+										}
+									}
+									return null;
+								})()}
 							{/* <InputNumber
 								prefix='$'
 								className='input-group'
